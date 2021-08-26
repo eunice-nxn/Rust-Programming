@@ -11,18 +11,18 @@
 
 #### Ways variables and data interact
 * Move
-	'''
-	let s1 = String::from("hello");
-	let s2 = s1;
-	println!("{}, world!", s1); // This won't work
-	'''
+	
+		let s1 = String::from("hello");
+		let s2 = s1;
+		println!("{}, world!", s1); // This won't work
+	
 	Because Rust considers s1 to no longer to be valid for memory safety and preventing double free error 
 * Clone
-	'''
-	let s1 = String::from("hello");
-	let s2 = s1.clone();
-	println!("s1 = {}, s2 = {}", s1, s2);
-	'''
+	
+		let s1 = String::from("hello");
+		let s2 = s1.clone();
+		println!("s1 = {}, s2 = {}", s1, s2);
+	
 
 * Copy ( Stack-Only Data )
 	+ All the integer types, such as u32
