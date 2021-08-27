@@ -3,7 +3,7 @@
 fn main() {
 
     /*
-     * This enum is Option<T>, and is defined by the standart library
+     * This enum is Option<T>, and is defined by the standard library
         enum Option<T> {
             Some(T),
             None,
