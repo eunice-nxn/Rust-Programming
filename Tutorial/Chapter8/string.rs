@@ -10,7 +10,7 @@ fn main() {
     
     // Strings are UTF-8 encoded
     let hello = String::from("안녕하세요");
-    let hello = String::from("He;;p");
+    let hello = String::from("Hello");
     
     // Appending to a String with push_str and push
     let mut s0 = String::from("foo");
