@@ -1,4 +1,4 @@
-###Error Handling
+### Error Handling
 
 #### Two kinds of error in Rust
 * Recoverable error 
@@ -21,5 +21,5 @@ enum Result<T, E> {
 * T : The type of the value that will be returned in a success case
 * E : The type of the error that will be returned in a failure case within the Err variant
 
-#### To panic! or Not to panic!
+
 
