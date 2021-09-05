@@ -13,12 +13,12 @@
 #### Unrecoverable errors with panic!
 #### Recoverable errors with Result \<T, E\>
 
-₩₩₩rust
-enum Result<T, E> {
-	Ok(T),
-	Err(E),
-}
-₩₩₩
+
+		enum Result<T, E> {
+			Ok(T),
+			Err(E),
+		}
+
 * T : The type of the value that will be returned in a success case
 * E : The type of the error that will be returned in a failure case within the Err variant
 
