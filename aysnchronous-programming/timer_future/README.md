@@ -85,13 +85,13 @@ pub trait Future {
 * The process of future
 1. async function
 ```rust
-	async fn foo() {
-		// ...
-	}
+async fn foo() {
+	// ...
+}
 ```
 2. spawn
 ```rust
-		spawner.spawn(foo())
+spawner.spawn(foo())
 ```
 3. Executor task queue
 4. Calls poll() on the Future
