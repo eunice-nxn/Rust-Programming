@@ -1,4 +1,7 @@
 # A Timer Future
+* reference 
+	+ [Public Tutorial](https://rust-lang.github.io/async-book/02_execution/02_future.html)
+	+ [Video](https://www.youtube.com/watch?v=NNwK5ZPAJCk&t=2612s)
 * Mutex around a boolean
 * Spins up a new thread that sleeps for some amount of time
 * When the thread wakes up, it sets the boolean to true and 'wakes up' the future
