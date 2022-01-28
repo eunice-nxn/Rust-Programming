@@ -1,4 +1,7 @@
 # A Timer Future
+* reference 
+	+ [Public Tutorial](https://rust-lang.github.io/async-book/02_execution/02_future.html)
+	+ [Video](https://www.youtube.com/watch?v=NNwK5ZPAJCk&t=2612s)
 * Mutex around a boolean
 * Spins up a new thread that sleeps for some amount of time
 * When the thread wakes up, it sets the boolean to true and 'wakes up' the future
@@ -7,13 +10,13 @@
 ## Four rules for using async/await
 	
 ```rust
-	async fn foo(s:String) -> i32 {
-		// ...
-	}
+async fn foo(s:String) -> i32 {
+	// ...
+}
 
-	fn foo(s:String) -> impl Future<Output=i32>{
-		// ...
-	}
+fn foo(s:String) -> impl Future<Output=i32>{
+	// ...
+}
 ```
 
 1. If you have a Future<Output=i32> and you want an i32, use .await on it
@@ -22,50 +25,50 @@
 4. Futures need to have poll() called over and over until a value is produced
 		
 ```rust
-		let mut gen = || {
-			let xs = vec![1, 2, 3];
-			let mut sum = 0;
-			for x in xs {
-				sum += x;
-				yield sum;
-			}
-		}
+let mut gen = || {
+	let xs = vec![1, 2, 3];
+	let mut sum = 0;
+	for x in xs {
+		sum += x;
+		yield sum;
+	}
+}
 ```
 * When we invoked gen for the first time, it would be basically run up to the yield and return at first value. 
 * If we invoke the generator again, we would get second value for second iteration of gen's loop after continue processing execution
 
 ```rust
-		let xs = vec![1, 2, 3];
-		let mut gen = || {
-			let mut sum = 0;
-			for x in xs.iter() { // iter0
-				sum += x;
-				yield sum; // Suspended0
-			}
-			for x in cs.iter().rev() { // iter1
-				sum -= x;
-				yield sum; // Suspended1
-			}
-		};
+let xs = vec![1, 2, 3];
+let mut gen = || {
+	let mut sum = 0;
+	for x in xs.iter() { // iter0
+		sum += x;
+		yield sum; // Suspended0
+	}
+	for x in cs.iter().rev() { // iter1
+		sum -= x;
+		yield sum; // Suspended1
+	}
+};
 ```
 
 ```rust
-		enum SumGenerator {
-			Unresumed {
-				xs: Vec<i32>,
-			},
-			Suspended0 {
-				xs: Vec<i32>,
-	 			iter0: Iter<'self, i32>,
-	 			sum: i32,
-			},
-			Suspended1 {
-				xs: Vec<i32>,
-				iter1: Iter<'self, i32>,
-				sum: i32,
-			}
-			Returned,
-		}
+enum SumGenerator {
+	Unresumed {
+		xs: Vec<i32>,
+	},
+	Suspended0 {
+		xs: Vec<i32>,
+		iter0: Iter<'self, i32>,
+		sum: i32,
+	},
+	Suspended1 {
+		xs: Vec<i32>,
+		iter1: Iter<'self, i32>,
+		sum: i32,
+	}
+	Returned,
+}
 ```
 * Generator let you call yield over and over to get values
 * async/await is a simpler syntax for a generator that implements the Future trait	
@@ -74,25 +77,25 @@
 * Executor : schedules tasks
 * Reactor : notifies the executor that tasks are ready to execute
 ```rust
-		pub trait Future {
-			type Output;
-			fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self:Output>;
+pub trait Future {
+	type Output;
+	fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<Self:Output>;
 ```
 * Executor calls poll, and provides a context
 	+ Executor's job is that calling repeatedly poll and it make sure the futures are doing the work supposed to do.
 * Context : interface to the reactor containg waker 
 
 * The process of future
-1. 
-		```rust
-				async fn foo() {
-					// ...
-				}
-		```
-2. 
-		```rust
-				spawner.spawn(foo())
-		```
+1. async function
+```rust
+async fn foo() {
+	// ...
+}
+```
+2. spawn
+```rust
+spawner.spawn(foo())
+```
 3. Executor task queue
 4. Calls poll() on the Future
 5. When the future returns ready state, it calls wake() (reactor)
