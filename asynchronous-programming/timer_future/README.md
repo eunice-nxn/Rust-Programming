@@ -84,15 +84,15 @@
 
 * The process of future
 1. 
-		```rust
-				async fn foo() {
-					// ...
-				}
-		```
+```rust
+		async fn foo() {
+			// ...
+		}
+```
 2. 
-		```rust
-				spawner.spawn(foo())
-		```
+```rust
+		spawner.spawn(foo())
+```
 3. Executor task queue
 4. Calls poll() on the Future
 5. When the future returns ready state, it calls wake() (reactor)
